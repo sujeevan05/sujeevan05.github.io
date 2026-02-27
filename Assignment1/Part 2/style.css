@@ -1,5 +1,17 @@
-/* General setup */
 
+/* Generated CSS */
+
+@import "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap";
+
+html {
+    font-family: "IBM Plex Serif", serif;
+}
+
+h1,
+h2 {
+  font-family: "Bevan", serif;
+}
+/* General setup */
 * {
   box-sizing: border-box;
 }
@@ -33,3 +45,47 @@ footer {
 footer p {
   text-align: center;
 }
+
+h1 {
+  font-size: 3rem;
+  text-align: center;
+  letter-spacing: 3px;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 0;
+  letter-spacing: 1px;
+}
+
+section h2 + p {
+  text-indent: 2rem;
+}
+
+p,
+li {
+  line-height: 1.6;
+  letter-spacing: 0.5px;
+}
+
+a {
+  outline: none;
+}
+
+a[href*="http"] {
+  padding-right: 16px;
+  background: url("external-link-52.png") no-repeat right center;
+  background-size: 14px 14px;
+}
+
+a:link,
+a:visited {
+  color: #aa6666;
+}
+
+a:focus,
+a:hover {
+  text-decoration: none;
+  color: #773333;
+
+  
