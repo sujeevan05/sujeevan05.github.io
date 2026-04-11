@@ -1,23 +1,20 @@
 // setup canvas
-
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
-const width = (canvas.width = window.innerWidth);
-const height = (canvas.height = window.innerHeight);
+const width = canvas.width = window.innerWidth;
+const height = canvas.height = window.innerHeight;
 
-// function to generate random number
-
+// helper functions
 function random(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// function to generate random color
-
 function randomRGB() {
-  return `rgb(${random(0, 255)},${random(0, 255)},${random(0, 255)})`;
+  return `rgb(${random(0,255)} ${random(0,255)} ${random(0,255)})`;
 }
 
+// Ball class
 class Ball {
   constructor(x, y, velX, velY, color, size) {
     this.x = x;
@@ -27,9 +24,6 @@ class Ball {
     this.color = color;
     this.size = size;
   }
-}
-
-class Ball {
 
   draw() {
     ctx.beginPath();
@@ -37,73 +31,20 @@ class Ball {
     ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
     ctx.fill();
   }
-}
-
-const testBall = new Ball(50, 100, 4, 4, "blue", 10);
-
-testBall.x;
-testBall.size;
-testBall.color;
-testBall.draw();
-
-class Ball {
 
   update() {
-    if (this.x + this.size >= width) {
+    if (this.x + this.size >= width || this.x - this.size <= 0) {
       this.velX = -this.velX;
     }
 
-    if (this.x - this.size <= 0) {
-      this.velX = -this.velX;
-    }
-
-    if (this.y + this.size >= height) {
-      this.velY = -this.velY;
-    }
-
-    if (this.y - this.size <= 0) {
+    if (this.y + this.size >= height || this.y - this.size <= 0) {
       this.velY = -this.velY;
     }
 
     this.x += this.velX;
     this.y += this.velY;
   }
-}
-//Animating the ball
-const balls = [];
 
-while (balls.length < 25) {
-  const size = random(10, 20);
-  const ball = new Ball(
-
-    random(0 + size, width - size),
-    random(0 + size, height - size),
-    random(-7, 7),
-    random(-7, 7),
-    randomRGB(),
-    size,
-  );
-
-  balls.push(ball);
-}
-
-function loop() {
-  ctx.fillStyle = "rgb(0 0 0 / 25%)";
-  ctx.fillRect(0, 0, width, height);
-
-  for (const ball of balls) {
-    ball.draw();
-    ball.update();
-  }
-
-  requestAnimationFrame(loop);
-}
-
-loop();
-
-//Adding collision detection
-class Ball {
-  // …
   collisionDetect() {
     for (const ball of balls) {
       if (this !== ball) {
@@ -112,12 +53,32 @@ class Ball {
         const distance = Math.sqrt(dx * dx + dy * dy);
 
         if (distance < this.size + ball.size) {
-          ball.color = this.color = randomRGB();
+          this.color = ball.color = randomRGB();
         }
       }
     }
   }
 }
+
+// create balls
+const balls = [];
+
+while (balls.length < 25) {
+  const size = random(10, 20);
+
+  const ball = new Ball(
+    random(size, width - size),
+    random(size, height - size),
+    random(-7, 7),
+    random(-7, 7),
+    randomRGB(),
+    size
+  );
+
+  balls.push(ball);
+}
+
+// animation loop
 function loop() {
   ctx.fillStyle = "rgb(0 0 0 / 25%)";
   ctx.fillRect(0, 0, width, height);
@@ -130,3 +91,5 @@ function loop() {
 
   requestAnimationFrame(loop);
 }
+
+loop();
