@@ -30,7 +30,7 @@ class Ball {
 }
 
 class Ball {
-  // …
+
   draw() {
     ctx.beginPath();
     ctx.fillStyle = this.color;
@@ -47,7 +47,7 @@ testBall.color;
 testBall.draw();
 
 class Ball {
-  // …
+
   update() {
     if (this.x + this.size >= width) {
       this.velX = -this.velX;
@@ -75,8 +75,7 @@ const balls = [];
 while (balls.length < 25) {
   const size = random(10, 20);
   const ball = new Ball(
-    // ball position always drawn at least one ball width
-    // away from the edge of the canvas, to avoid drawing errors
+
     random(0 + size, width - size),
     random(0 + size, height - size),
     random(-7, 7),
@@ -101,3 +100,33 @@ function loop() {
 }
 
 loop();
+
+//Adding collision detection
+class Ball {
+  // …
+  collisionDetect() {
+    for (const ball of balls) {
+      if (this !== ball) {
+        const dx = this.x - ball.x;
+        const dy = this.y - ball.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < this.size + ball.size) {
+          ball.color = this.color = randomRGB();
+        }
+      }
+    }
+  }
+}
+function loop() {
+  ctx.fillStyle = "rgb(0 0 0 / 25%)";
+  ctx.fillRect(0, 0, width, height);
+
+  for (const ball of balls) {
+    ball.draw();
+    ball.update();
+    ball.collisionDetect();
+  }
+
+  requestAnimationFrame(loop);
+}
