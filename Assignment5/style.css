@@ -23,7 +23,7 @@ h1, h2, h3 {
   color: #2a2a2a;
 }
 
-p, input, li, table, label {
+p, input, li, table, label, button, a {
   font-family: 'Open Sans Condensed', sans-serif;
   color: #2a2a2a;
 }
@@ -41,10 +41,12 @@ h2 {
   font-size: 3rem;
   text-align: center;
   margin-top: 0;
+  margin-bottom: 20px;
 }
 
 h3 {
   font-size: 2.2rem;
+  margin-bottom: 15px;
 }
 
 p, li, table, label, button, input {
@@ -52,29 +54,40 @@ p, li, table, label, button, input {
   line-height: 1.5;
 }
 
-/* hidden label for screen readers */
+/* visually hidden text for screen readers */
 .sr-only {
   position: absolute;
   left: -10000px;
 }
 
-/* || header layout */
+/* || page layout */
 
-.nav, article, footer, .secondary {
-  background-color: rgb(215, 231, 244);
+.header,
+.nav,
+article,
+.secondary,
+footer {
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
-article, footer, .secondary {
+article,
+.secondary,
+footer {
   padding: 10px 30px;
+}
+
+.header {
+  margin: 10px 0;
 }
 
 article {
   margin-right: 10px;
 }
 
+/* || nav */
+
 .nav {
   height: 50px;
-  background-color: #ff80ff;
   display: flex;
   padding: 1% 0;
   margin-bottom: 10px;
@@ -82,13 +95,14 @@ article {
 
 .nav ul {
   padding: 0;
+  margin: 0;
   list-style-type: none;
   flex: 2;
   display: flex;
+  align-items: center;
 }
 
 .nav li {
-  display: inline;
   text-align: center;
   flex: 1;
 }
@@ -112,10 +126,13 @@ article {
 .search input {
   font-size: 1.6rem;
   height: 32px;
+  box-sizing: border-box;
 }
 
 .search input[type="search"] {
   flex: 3;
+  border: 1px solid #ccc;
+  padding: 0 8px;
 }
 
 .search input[type="submit"] {
@@ -124,6 +141,7 @@ article {
   background: #333;
   border: 0;
   color: white;
+  cursor: pointer;
 }
 
 /* || main layout */
@@ -144,12 +162,13 @@ footer {
   margin-top: 10px;
 }
 
-/* Table styling */
+/* || table */
 
 table {
   width: 100%;
   background-color: #dde;
   border-collapse: collapse;
+  margin-bottom: 20px;
 }
 
 caption {
@@ -160,9 +179,6 @@ caption {
 
 th, td {
   padding: 10px;
-}
-
-td, th {
   text-align: center;
 }
 
@@ -174,22 +190,25 @@ tbody tr:nth-child(odd) {
   background-color: #def;
 }
 
-/* styling content images and audio */
+/* || images and audio */
 
 img, audio {
   display: block;
-  margin: 0 auto;
+  margin: 20px auto;
+  max-width: 100%;
 }
 
 audio {
   width: 500px;
+  max-width: 100%;
 }
 
-/* Comments styling */
+/* || comments */
 
 .comments {
   background-color: #def;
   padding: 10px;
+  margin-top: 20px;
 }
 
 .show-hide {
@@ -202,7 +221,7 @@ audio {
   font-size: 1.6rem;
   line-height: 32px;
   display: block;
-  margin: 0 auto;
+  margin: 0 auto 20px auto;
 }
 
 .comment-form {
@@ -220,7 +239,7 @@ audio {
   text-align: right;
 }
 
-.comment-form input {
+.comment-form input[type="text"] {
   margin-left: 1rem;
   flex: 6;
 }
@@ -238,10 +257,12 @@ audio {
   width: 30%;
   display: block;
   margin: 0 auto;
+  cursor: pointer;
 }
 
 .comment-container {
   margin-top: 0;
+  padding-left: 0;
 }
 
 .comment-container li {
